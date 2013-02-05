@@ -1,4 +1,9 @@
 class graphite::install {
+  # Set path for this class
+  Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", 
+                   "/usr/sbin/", "/usr/local/bin", 
+		   "/usr/local/sbin", ]
+  }
 
   package {[
     'python-ldap',
