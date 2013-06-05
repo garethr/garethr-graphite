@@ -1,0 +1,42 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          carbon
+# Required-Start:    $remote_fs $syslog $networking
+# Required-Stop:     $remote_fs $syslog $networking
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Carbon
+# Description:       Carbon is one of the components of Graphite, and is responsible for receiving metrics over the network and writing them down to disk using a storage backend
+### END INIT INFO
+
+# Very basic init script. Needs some love / some upstart
+# Cribbed from https://github.com/garethr/garethr-graphite/blob/master/files/carbon.conf
+
+. /lib/init/vars.sh
+. /lib/lsb/init-functions
+
+GRAPHITE_DIR='/opt/graphite'
+GRAPHITE_STORAGE_DIR="${GRAPHITE_DIR}/storage"
+PIDFILE="${GRAPHITE_STORAGE_DIR}/carbon-cache-a.pid"
+GRAPHITE_CONF_DIR="${GRAPHITE_DIR}/conf"
+COMMAND="python ${GRAPHITE_DIR}/bin/carbon-cache.py start"
+
+case "$1" in
+  start)
+      cd $GRAPHITE_DIR && exec $COMMAND
+      ;;
+  stop)
+      kill `cat $PIDFILE`
+      ;;
+  restart)
+      $0 stop
+      $0 start
+      ;;
+  status)
+      status_of_proc -p $PIDFILE carbon carbon && exit 0 || exit $?
+      ;;
+  *)
+      echo "Usage: $0 {start|stop|restart|status}" >&2
+      exit 3
+      ;;
+esac
