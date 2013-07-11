@@ -2,7 +2,7 @@ class graphite::config {
   # Set path for this class
   Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", 
                    "/usr/sbin/", "/usr/local/bin", 
-		   "/usr/local/sbin", ]
+                   "/usr/local/sbin", ]
   }
 
   $admin_password = $graphite::admin_password
