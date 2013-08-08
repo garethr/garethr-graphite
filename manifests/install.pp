@@ -16,6 +16,7 @@ class graphite::install {
   }
 
   exec { 'ensure-old-enough-django-for-graphite-web':
+    path => ['/usr/bin', '/usr/local/bin'],
     command => 'pip install Django\<1.4',
     creates => '/usr/local/bin/django-admin.py',
     require => Package['python-pip'],
