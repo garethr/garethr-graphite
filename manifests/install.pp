@@ -20,16 +20,19 @@ class graphite::install {
   exec { 'install-carbon':
     command => 'pip install carbon',
     creates => '/opt/graphite/lib/carbon',
+    requires => Class['python'],
   }
 
   exec { 'install-graphite-web':
     command => 'pip install graphite-web',
     creates => '/opt/graphite/webapp/graphite',
+    requires => Class['python'],
   }
 
   package { 'whisper':
     ensure   => installed,
     provider => pip,
+    requires => Class['python'],
   }
 
   file { '/var/log/carbon':
