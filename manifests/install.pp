@@ -1,5 +1,7 @@
 class graphite::install {
 
+  include python
+
   ensure_packages([
     'python-ldap',
     'python-cairo',
@@ -11,7 +13,6 @@ class graphite::install {
     'python-memcache',
     'python-pysqlite2',
     'python-support',
-    'python-pip',
   ])
 
   Package['python-pip'] -> Package <| provider == 'pip' and ensure != absent and ensure != purged |>
@@ -19,6 +20,7 @@ class graphite::install {
   package { ['whisper', 'carbon', 'graphite-web']:
     ensure   => installed,
     provider => pip,
+    require  => Class['python'],
   }
 
   file { '/var/log/carbon':
