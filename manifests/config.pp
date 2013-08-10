@@ -34,7 +34,7 @@ class graphite::config {
     cwd       => '/opt/graphite/webapp/graphite',
     creates   => '/opt/graphite/storage/graphite.db',
     subscribe => File['/opt/graphite/storage'],
-    require   => File['/opt/graphite/webapp/graphite/initial_data.json'],
+    require   => [File['/opt/graphite/webapp/graphite/initial_data.json'], File['/opt/graphite/webapp/graphite/local_settings.py']],
   }
 
   file { '/opt/graphite/webapp/graphite/initial_data.json':
