@@ -30,7 +30,7 @@ class graphite::config {
   }
 
   exec { 'init-db':
-    command   => 'python manage.py syncdb --noinput',
+    command   => '/usr/bin/python manage.py syncdb --noinput',
     cwd       => '/opt/graphite/webapp/graphite',
     creates   => '/opt/graphite/storage/graphite.db',
     subscribe => File['/opt/graphite/storage'],
