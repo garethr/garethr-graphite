@@ -1,6 +1,10 @@
 class graphite::install {
 
-  include python
+  if $graphite::manage_python {
+    include python
+  } else {
+    ensure_packages(['python-pip'])
+  }
 
   ensure_packages([
     'python-ldap',

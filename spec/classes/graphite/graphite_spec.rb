@@ -10,6 +10,8 @@ describe 'graphite', :type => :class do
   it { should contain_package('carbon')}
   it { should contain_package('graphite-web')}
 
+  it { should include_class('python')}
+
   it { should contain_service('carbon') }
   it { should contain_service('httpd') }
 
@@ -23,6 +25,11 @@ describe 'graphite', :type => :class do
   context 'with admin password' do
     let(:params) { {'admin_password' => 'should be a hash' }}
     it { should contain_file('/opt/graphite/webapp/graphite/initial_data.json').with_content(/should be a hash/) }
+  end
+
+  context 'when not managing python' do
+    let(:params) { {'manage_python' => false} }
+    it { should_not include_class('python')}
   end
 
 end
