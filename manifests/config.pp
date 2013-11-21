@@ -3,9 +3,22 @@ class graphite::config {
   $admin_password = $graphite::admin_password
   $port = $graphite::port
 
-  file { '/etc/init.d/carbon':
-    ensure => link,
-    target => '/lib/init/upstart-job',
+  case $::operatingsystem {
+    'Debian': {
+      file { '/etc/init.d/carbon':
+        ensure => present,
+        source => 'puppet:///modules/graphite/carbon',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0755',
+      }
+    }
+    'Ubuntu': {
+      file { '/etc/init.d/carbon':
+        ensure => link,
+        target => '/lib/init/upstart-job',
+      }
+    }
   }
 
   file { '/etc/init/carbon.conf':

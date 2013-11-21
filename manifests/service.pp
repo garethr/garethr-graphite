@@ -3,6 +3,6 @@ class graphite::service {
     ensure     => running,
     hasstatus  => true,
     hasrestart => true,
-    provider   => upstart,
+    provider   => $graphite::params::service_provider,
   }
 }
