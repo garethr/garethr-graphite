@@ -19,6 +19,14 @@ pass this in like so:
       port => 9000,
     }
 
+This modules will install Python and the ensure the relevant python
+dependencies are available. If you would rather not have this module
+manage python then you can disable this feature like so:
+
+    class { 'graphite':
+      manage_python = false,
+    }
+
 ## Another Graphite module?
 
 Graphite can be painfull to install and many blog posts and gists are

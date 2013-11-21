@@ -10,4 +10,5 @@ class graphite::params {
       $service_provider = debian
     }
   }
+  $manage_python = true
 }
