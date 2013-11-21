@@ -1,8 +1,6 @@
 fixtures:
   repositories:
-    apache:
-      repo: git://github.com/puppetlabs/puppetlabs-apache.git
-      ref: '0.6.0'
+    apache:   git://github.com/puppetlabs/puppetlabs-apache.git
     stdlib:   git://github.com/puppetlabs/puppetlabs-stdlib.git
     firewall: git://github.com/puppetlabs/puppetlabs-firewall.git
     python:   git://github.com/footballradar/puppet-python.git
