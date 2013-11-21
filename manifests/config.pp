@@ -2,6 +2,7 @@ class graphite::config {
 
   $admin_password = $graphite::admin_password
   $port = $graphite::port
+  $servername = $graphite::servername
 
   file { '/etc/init.d/carbon':
     ensure => link,
@@ -62,12 +63,17 @@ class graphite::config {
     require => File['/opt/graphite/storage']
   }
 
+  include apache
+
+  $docroot = '/opt/graphite/webapp'
+
   apache::mod { 'headers': }
-  apache::vhost { 'graphite':
+  apache::mod { 'python': }
+  apache::vhost { $servername:
     priority => '10',
     port     => $port,
-    template => 'graphite/virtualhost.conf',
-    docroot  => '/opt/graphite/webapp',
+    custom_fragment => template('graphite/virtualhost.conf'),
+    docroot  => $docroot,
     logroot  => '/opt/graphite/storage/log/webapp/',
   }
 

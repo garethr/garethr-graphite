@@ -5,5 +5,5 @@ license       'Apache License, Version 2.0'
 summary       'Module to manage the Graphite monitoring tool'
 project_page  'https://github.com/garethr/garethr-graphite'
 
-dependency    'puppetlabs/apache', '0.6.0'
+dependency    'puppetlabs/apache', '0.9.x'
 dependency    'footballradar/python', '0.x'
