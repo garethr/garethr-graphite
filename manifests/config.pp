@@ -64,11 +64,11 @@ class graphite::config {
   }
 
   include apache
+  include apache::mod::headers
+  include apache::mod::python
 
   $docroot = '/opt/graphite/webapp'
 
-  apache::mod { 'headers': }
-  apache::mod { 'python': }
   apache::vhost { $servername:
     priority => '10',
     port     => $port,
