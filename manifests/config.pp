@@ -1,4 +1,9 @@
 class graphite::config {
+  # Set path for this class
+  Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", 
+                   "/usr/sbin/", "/usr/local/bin", 
+                   "/usr/local/sbin", ]
+  }
 
   $admin_password = $graphite::admin_password
   $port = $graphite::port
@@ -66,7 +71,6 @@ class graphite::config {
   apache::vhost { 'graphite':
     priority => '10',
     port     => $port,
-    template => 'graphite/virtualhost.conf',
     docroot  => '/opt/graphite/webapp',
     logroot  => '/opt/graphite/storage/log/webapp/',
   }
